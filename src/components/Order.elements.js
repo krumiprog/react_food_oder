@@ -14,7 +14,7 @@ export const ColumnLeft = styled.div`
 `;
 
 export const ColumnRight = styled.div`
-  width: 48px;
+  width: 55px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -41,11 +41,13 @@ export const Info = styled.div`
 `;
 
 export const Description = styled.div`
+  max-width: 185px;
   margin-bottom: 4px;
   font-weight: 500;
   font-size: 14px;
   line-height: 130%;
   color: #fff;
+
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;

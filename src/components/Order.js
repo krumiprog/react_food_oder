@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   Delete,
   Description,
@@ -13,43 +12,34 @@ import {
   ColumnLeft,
   Row,
 } from './Order.elements';
-
 import { ReactComponent as DeleteIcon } from '../images/DeleteIcon.svg';
-import Beef from '../images/Beef.png';
 
-const Order = () => {
-  const [amount, setAmount] = useState('');
-  const [note, setNote] = useState('');
-
-  const handleClick = () => {};
+const Order = ({ order, removeOrder, addOrderNote }) => {
+  const { id, img, description, price, amount, total, note } = order;
 
   return (
     <OderCard>
       <ColumnLeft>
         <Row>
-          <Image src={Beef} />
+          <Image src={img} />
           <Info>
-            <Description>Spicy seasoned seafood noodles</Description>
-            <Price>$ 2.23</Price>
+            <Description>{description}</Description>
+            <Price>$ {price}</Price>
           </Info>
-          <InputAmount
-            type="text"
-            value={amount}
-            onChange={e => setAmount(e.target.value)}
-          />
+          <InputAmount type="text" value={amount} disabled />
         </Row>
         <Row>
           <InputNote
             type="text"
             value={note}
-            onChange={e => setNote(e.target.value)}
+            onChange={e => addOrderNote(id, e.target.value)}
             placeholder="Order Note..."
           />
         </Row>
       </ColumnLeft>
       <ColumnRight>
-        <PriceTotal>$ 4.44</PriceTotal>
-        <Delete onClick={handleClick}>
+        <PriceTotal>$ {total.toFixed(2)}</PriceTotal>
+        <Delete onClick={() => removeOrder(order)}>
           <DeleteIcon />
         </Delete>
       </ColumnRight>

@@ -1,3 +1,12 @@
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  addNote,
+  clearCart,
+  removeDish,
+  selectCart,
+} from '../features/cart/cartSlicer';
+import { returnDishes } from '../features/dishes/dishesSlicer';
 import {
   Button,
   Footer,
@@ -10,7 +19,27 @@ import {
 import Order from './Order';
 
 const Orders = () => {
-  const handleClick = () => {};
+  const [total, setTotal] = useState(0);
+
+  const cart = useSelector(selectCart);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setTotal(cart.reduce((prev, cur) => prev + cur.total, 0));
+  }, [cart]);
+
+  const removeOrder = ({ id, amount }) => {
+    dispatch(removeDish(id));
+    dispatch(returnDishes({ id, amount }));
+  };
+
+  const addOrderNote = (id, note) => {
+    dispatch(addNote({ id, note }));
+  };
+
+  const handleClick = () => {
+    dispatch(clearCart());
+  };
 
   return (
     <OrdersContainer>
@@ -21,19 +50,21 @@ const Orders = () => {
         <div>Price</div>
       </Header>
       <OrdersList>
-        <Order />
-        <Order />
-        <Order />
-        <Order />
-        <Order />
-        <Order />
+        {cart.map(order => (
+          <Order
+            key={order.id}
+            order={order}
+            removeOrder={removeOrder}
+            addOrderNote={addOrderNote}
+          />
+        ))}
       </OrdersList>
       <Footer>
         <Row>
           <div>Sub total</div>
-          <div>$ 21,03</div>
+          <div>$ {total.toFixed(2)}</div>
         </Row>
-        <Button onClick={handleClick}>Continue to Payment</Button>
+        <Button onClick={handleClick}>Payment</Button>
       </Footer>
     </OrdersContainer>
   );

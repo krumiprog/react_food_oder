@@ -22,10 +22,10 @@ export const Title = styled.h2`
 `;
 
 export const Header = styled.div`
-  display: grid;
   margin-bottom: 24px;
   padding-bottom: 24px;
   display: flex;
+  gap: 10px;
   color: #fff;
   border-bottom: 1px solid #393c49;
 
@@ -34,7 +34,8 @@ export const Header = styled.div`
   }
 
   & > :not(:first-child) {
-    width: 48px;
+    width: 55px;
+    text-align: center;
   }
 `;
 
@@ -89,4 +90,8 @@ export const Button = styled.button`
   outline: none;
   box-shadow: 0px 8px 24px rgba(234, 124, 105, 0.3);
   cursor: pointer;
+
+  &:hover {
+    box-shadow: none;
+  }
 `;

@@ -6,15 +6,22 @@ import {
   Price,
 } from './Card.elements';
 
-import Beef from '../images/Beef.png';
+const Card = ({ item, buyDish }) => {
+  const { description, img, price, available } = item;
 
-const Card = () => {
+  const handleClick = () => {
+    if (available === 0) {
+      return;
+    }
+    buyDish(item);
+  };
+
   return (
-    <CardContent>
-      <Image src={Beef} alt="dish" />
-      <Description>Spicy seasoned seafood noodles</Description>
-      <Price>$ 2.29</Price>
-      <Amount>20 Bowls available</Amount>
+    <CardContent onClick={handleClick}>
+      <Image src={img} alt="dish" />
+      <Description>{description}</Description>
+      <Price>$ {price}</Price>
+      <Amount>{available} Bowls available</Amount>
     </CardContent>
   );
 };

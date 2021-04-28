@@ -1,5 +1,14 @@
+import { Container } from '../globalStyles';
+import { HomeContainer, Title } from './Home.elements';
+
 const Settings = () => {
-  return <div></div>;
+  return (
+    <Container>
+      <HomeContainer>
+        <Title>Settings</Title>
+      </HomeContainer>
+    </Container>
+  );
 };
 
 export default Settings;

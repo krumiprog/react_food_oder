@@ -14,6 +14,7 @@ export const CardContent = styled.div`
   border-radius: 16px;
   cursor: pointer;
   transition: 0.5s;
+  user-select: none;
 
   &:hover {
     transform: translateZ(1px) scale(1.05);
