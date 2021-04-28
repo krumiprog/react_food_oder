@@ -10,11 +10,12 @@ import {
 } from './Header.elements';
 import { ReactComponent as SearchIcon } from '../images/SearchIcon.svg';
 
-const Header = () => {
+const Header = ({ setSearchWord }) => {
   const [search, setSearch] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
+    setSearchWord(search);
     setSearch('');
   };
 

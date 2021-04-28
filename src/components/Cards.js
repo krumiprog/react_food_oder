@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   decrementAvailable,
@@ -7,9 +8,23 @@ import { addDish } from '../features/cart/cartSlicer';
 import { CardsContainer } from './Cards.elements';
 import Card from './Card';
 
-const Cards = () => {
+const Cards = ({ searchWord }) => {
   const dishes = useSelector(selectDishes);
   const dispatch = useDispatch();
+
+  const [cards, setCards] = useState(dishes);
+
+  useEffect(() => {
+    if (!searchWord) {
+      setCards(dishes);
+    } else {
+      setCards(
+        dishes.filter(dish =>
+          dish.description.toLowerCase().includes(searchWord)
+        )
+      );
+    }
+  }, [dishes, searchWord]);
 
   const buyDish = item => {
     const { id, img, description, price } = item;
@@ -19,7 +34,7 @@ const Cards = () => {
 
   return (
     <CardsContainer>
-      {dishes.map(item => (
+      {cards.map(item => (
         <Card key={item.id} item={item} buyDish={buyDish} />
       ))}
     </CardsContainer>
